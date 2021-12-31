@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pmc_mobile_app/loginPage.dart';
+import 'package:pmc_mobile_app/resetPasswordPage.dart';
 
 class forgotPasswordPage extends StatefulWidget {
   @override
@@ -31,6 +32,20 @@ class forgotPasswordPageState extends State<forgotPasswordPage> {
                     ),
                   )
               ),
+
+              Positioned(
+                top: 0.0,
+                left: 0.0,
+                right: 0.0,
+                child: AppBar(
+                  title: Text(''),// You can add title here
+                  leading: new IconButton(
+                    icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                  backgroundColor: Colors.blue.withOpacity(0.0), //You can make this transparent
+                  elevation: 0.0, //No shadow
+                ),),
 
               Positioned(
                 left: MediaQuery.of(context).size.width * 0.08,
@@ -74,9 +89,11 @@ class forgotPasswordPageState extends State<forgotPasswordPage> {
                                 borderRadius: BorderRadius.circular(14),
                               )),
                         ),
-                        onPressed: () => {
-                          print(forgotpasswordController.value),
-
+                        onPressed: (){
+                          Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => resetPasswordPage()),
+                          );
+                          print("reset password !");
                         },
                         child: Text("Get OTP",style: TextStyle(fontSize: 16 , color: Colors.white),),
                       ),

@@ -31,6 +31,20 @@ class resetPasswordPageState extends State<resetPasswordPage> {
                   )
               ),
 
+               Positioned(
+                top: 0.0,
+                left: 0.0,
+                right: 0.0,
+                child: AppBar(
+                  title: Text(''),// You can add title here
+                  leading: new IconButton(
+                    icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                  backgroundColor: Colors.blue.withOpacity(0.0), //You can make this transparent
+                  elevation: 0.0, //No shadow
+                ),),
+
               Positioned(
                 left: MediaQuery.of(context).size.width * 0.08,
                 top : MediaQuery.of(context).size.height * 0.43,
