@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pmc_mobile_app/forgotPasswordPage.dart';
 import 'package:pmc_mobile_app/resetPasswordPage.dart';
+import 'listOfDoctors.dart';
 import 'loginPage.dart';
 import 'registrationPage.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Welcome to Flutter',
       home: Scaffold(
         body:
-        loginPage(),
+        listOfDoctorsPage(),
       ),
     );
   }
