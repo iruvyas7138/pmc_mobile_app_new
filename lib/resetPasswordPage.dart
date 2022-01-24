@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'loginPage.dart';
+import 'otpVerificationPage.dart';
+
 class resetPasswordPage extends StatefulWidget {
   @override
     resetPasswordPageState createState() => resetPasswordPageState();
@@ -9,7 +12,9 @@ class resetPasswordPage extends StatefulWidget {
 
 class resetPasswordPageState extends State<resetPasswordPage> {
 
-  TextEditingController forgotpasswordController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+  TextEditingController confirmpasswordController = new TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -57,57 +62,84 @@ class resetPasswordPageState extends State<resetPasswordPage> {
               Positioned(
                 top: MediaQuery.of(context).size.height * 0.52,
                 child: Container(
-                  height : 170,
+                  height : MediaQuery.of(context).size.height/3,
                   width: MediaQuery.of(context).size.width * 0.8,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextFormField(
-                        decoration: InputDecoration(
-                          hintText: "Password",
-                          prefixIcon: Icon(Icons.lock),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(14))),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextFormField(
+                          controller: passwordController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty ) {
+                              return 'Please enter correct password';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            hintText: "Password",
+                            prefixIcon: Icon(Icons.lock),
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(14))),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20.0),
+                          ),
+
                         ),
-                        controller: forgotpasswordController,
-                      ),
 
-                      TextFormField(
-                        decoration: InputDecoration(
-                          hintText: "Confirm Password",
-                          prefixIcon: Icon(Icons.lock),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(14))),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
+                        TextFormField(
+                          controller: confirmpasswordController,
+                          validator: (value) {
+                            if ((passwordController.value)!=(confirmpasswordController.value)  ) {
+                                return 'Please enter same password';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            hintText: "Confirm Password",
+                            prefixIcon: Icon(Icons.lock),
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(14))),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20.0),
+                          ),
                         ),
-                        controller: forgotpasswordController,
-                      ),
 
-                      TextButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.lightBlue),
-                          fixedSize:
-                          MaterialStateProperty.all<Size>(Size(MediaQuery.of(context).size.width*0.8, 40)),
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(14),
-                              )),
+                        TextButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.lightBlue),
+                            fixedSize:
+                            MaterialStateProperty.all<Size>(Size(MediaQuery.of(context).size.width*0.8, 40)),
+                            shape: MaterialStateProperty.all<OutlinedBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                )),
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()){
+                              if((passwordController.value) == (confirmpasswordController.value)){
+                                Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => loginPage()),
+                                );
+                              }else
+                              {
+                                return print('Please enter same password');
+
+                              }
+                            };
+                            print(passwordController.value);
+                            print(confirmpasswordController.value);
+                          },
+                          child: Text("Submit",style: TextStyle(fontSize: 16 , color: Colors.white),),
                         ),
-                        onPressed: () => {
-                          print(forgotpasswordController.value),
 
-                        },
-                        child: Text("Submit",style: TextStyle(fontSize: 16 , color: Colors.white),),
-                      ),
-
-                    ],
-                  ),
+                      ],
+                    ),
+                  )
                 ),
               ),
 

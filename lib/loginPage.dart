@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pmc_mobile_app/registrationPage.dart';
 import 'forgotPasswordPage.dart';
+import 'listOfDoctors.dart';
 
 class loginPage extends StatefulWidget {
   @override
@@ -10,6 +11,8 @@ class loginPage extends StatefulWidget {
 }
 
 class loginPageState extends State<loginPage> {
+
+  final _formKey = GlobalKey<FormState>();
 
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
@@ -44,41 +47,67 @@ class loginPageState extends State<loginPage> {
               ),
 
               Positioned(
-                top: MediaQuery.of(context).size.height * 0.45,
+                top: MediaQuery.of(context).size.height * 0.40,
+                height: MediaQuery.of(context).size.height /3,
                 child: Container(
-                  height : 120,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextFormField(
-                        decoration: InputDecoration(
-                          hintText: "Phone Number",
-                          prefixIcon: Icon(Icons.phone_outlined ),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(14))),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
-                        ),
-                        controller: emailController,
-                      ),
+                    width: MediaQuery.of(context).size.width ,
+                  child: Padding(padding: EdgeInsets.fromLTRB(15, 10, 15, 4),
+                      child: Form(
+                        key : _formKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment : CrossAxisAlignment.center, children: [
+                            TextFormField(
+                              controller: emailController,
+                              validator: (value) {
+                                if (value == null || value.isEmpty && value.length == 10 && !RegExp(r'^[+91]*[0-9]+$').hasMatch(value)) {
+                                  return 'Please enter correct phone number';
+                                }
+                                return null;
+                              },
 
-                      TextFormField(
-                        decoration: InputDecoration(
-                          hintText: "Password",
-                          prefixIcon: Icon(Icons.lock_outline),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(14))),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
+                              decoration: InputDecoration(
+                                hintText: "Phone Number",
+                                prefixIcon: Icon(Icons.phone_outlined ),
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(14))),
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 20.0),
+                              ),
+                            ),
+
+
+                            TextFormField(
+                              controller: passwordController,
+
+                              validator: (value) {
+                                if (value == null || value.isEmpty ) {
+                                  return 'Please enter correct password';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                hintText: "Password",
+                                prefixIcon: Icon(Icons.lock_outline),
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(14))),
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 20.0),
+                              ),
+
+                            ),
+                          ],
                         ),
-                        controller: passwordController,
-                      ),],),),),
+                      ))
+
+
+                ),
+              ),
 
                     Positioned(
-                      top: MediaQuery.of(context).size.height * 0.65,
+                      top: MediaQuery.of(context).size.height * 0.67,
                       right: MediaQuery.of(context).size.width * 0.02,
                       child:TextButton(
                           onPressed: (){
@@ -102,7 +131,7 @@ class loginPageState extends State<loginPage> {
                     ),
 
                     Positioned(
-                      top: MediaQuery.of(context).size.height * 0.73,
+                      top: MediaQuery.of(context).size.height * 0.75,
                       child :TextButton(
                         style: ButtonStyle(
                           backgroundColor:
@@ -115,6 +144,11 @@ class loginPageState extends State<loginPage> {
                               )),
                         ),
                         onPressed: () => {
+                          if (_formKey.currentState!.validate()){
+                            Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => listOfDoctorsPage()),
+                            ),
+                          },
                           print(emailController.value),
                           print(passwordController.value),
                         },
@@ -122,7 +156,6 @@ class loginPageState extends State<loginPage> {
                       ) ,
 
                     ),
-
 
               Positioned(
                   top : MediaQuery.of(context).size.height * 0.85,
