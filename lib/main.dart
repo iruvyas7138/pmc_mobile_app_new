@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pmc_mobile_app/bookAppointment.dart';
-import 'package:pmc_mobile_app/consultNow.dart';
-import 'package:pmc_mobile_app/myProfilePage1.dart';
-import 'package:pmc_mobile_app/myProfilePage2.dart';
-import 'package:pmc_mobile_app/selectSymptom.dart';
-import 'doctorDetails.dart';
-import 'listOfDoctors.dart';
-import 'loginPage.dart';
-import 'myProfilePage3.dart';
+import 'package:pmc_mobile_app/doctorScreens/RegistrationLogin/Login.dart';
+import 'package:pmc_mobile_app/doctorScreens/dashboard/dashboard.dart';
+import 'package:pmc_mobile_app/doctorScreens/doctorAppointmentPage.dart';
+import 'package:pmc_mobile_app/doctorScreens/forgotresetPassword/ForgotPassword.dart';
+import 'package:pmc_mobile_app/doctorScreens/forgotresetPassword/ResetPassword.dart';
+import 'package:pmc_mobile_app/doctorScreens/profile/doctorProfilePage2.dart';
+import 'doctorScreens/RegistrationLogin/Registration.dart';
+
 
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -23,7 +22,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Welcome to Flutter',
       home: Scaffold(
-        body:myProfilePage2(),
+        body:ResetPassword(),
+
       ),
     );
   }

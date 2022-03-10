@@ -37,6 +37,8 @@ dependencies:
   expandable: ^5.0.1
   table_calendar: ^3.0.3
   image_picker: ^0.8.4+4
+  flutter_switch: ^0.3.2
+
 
 dev_dependencies:
   flutter_test:
@@ -67,9 +69,17 @@ flutter:
 
   assets:
     - assets/doctor_logo.png
+    - assets/patientlogo.png
     - assets/login_screen_logo.png
     - assets/registration_screen_logo.png
     - assets/otp_verification_logo.png
+    - assets/homescreenlogo.png
+    - assets/doctorwelcomeimage.png
+    - assets/createschedulelogo.png
+    - assets/querylogo.png
+    - assets/rupeeslogo.png
+    - assets/doctorsignature.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -82,6 +92,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: MyFlutterApp
+      fonts:
+        - asset: Icons/MyFlutterApp.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:
